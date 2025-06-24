@@ -16,7 +16,7 @@ app.post('/api/try-on', upload.single('photo'), async (req, res) => {
       image: req.file.path,
       garmentId: 'remera-1', 
     }, {
-      headers: { Authorization: 'Bearer TU_API_KEY_DEEPAR' },
+      headers: { Authorization: 'Bearer 6c4eb607818deb4a74f6a549a0de87321012db8a6c7ad9621c5cbed5f1709fe33b69026a70af9c31' },
     });
 
     res.json({ success: true, imageUrl: response.data.url });

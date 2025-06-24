@@ -6,7 +6,7 @@ const path = require('path');
 
 const app = express();
 const upload = multer({ dest: 'uploads/' });
-
+const DEEPAR_API_KEY = process.env.DEEPAR_API_KEY; // Usa la variable de entorno
 app.use(cors());
 app.use(express.static('public')); 
 
@@ -16,7 +16,7 @@ app.post('/api/try-on', upload.single('photo'), async (req, res) => {
       image: req.file.path,
       garmentId: 'remera-1', 
     }, {
-      headers: { Authorization: 'Bearer 6c4eb607818deb4a74f6a549a0de87321012db8a6c7ad9621c5cbed5f1709fe33b69026a70af9c31' },
+      headers: { Authorization: 'Bearer ${DEEPAR_API_KEY}' },
     });
 
     res.json({ success: true, imageUrl: response.data.url });

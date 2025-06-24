@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Probador Virtual de Ropa</title>
-  <link rel="stylesheet" href="public/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>👕 Prueba esta remera en tu cuerpo</h1>
@@ -21,7 +21,7 @@
         const formData = new FormData();
         formData.append('photo', photo);
 
-        const response = await fetch('http://localhost:3000/api/try-on', {
+        const response = await fetch('https://provadoria.vercel.app/api/try-on', {
           method: 'POST',
           body: formData,
         });

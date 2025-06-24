@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Probador Virtual de Ropa</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>👕 Prueba esta remera en tu cuerpo</h1>
+  <input type="file" id="photo" accept="image/*" hidden>
+  <button onclick="uploadPhoto()">Subir foto y probar</button>
+  <div id="result"></div>
+
+  <script>
+    async function uploadPhoto() {
+      const photoInput = document.getElementById('photo');
+      photoInput.click(); // Abre el selector de archivos
+
+      photoInput.addEventListener('change', async (e) => {
+        const photo = e.target.files[0];
+        const formData = new FormData();
+        formData.append('photo', photo);
+
+        // Envía la foto al backend
+        const response = await fetch('http://localhost:3000/api/try-on', {
+          method: 'POST',
+          body: formData,
+        });
+        const result = await response.json();
+
+        // Muestra el resultado
+        if (result.success) {
+          document.getElementById('result').innerHTML = `
+            <img src="${result.imageUrl}" alt="Remera en tu cuerpo" width="400">
+            <p>¡Así te queda!</p>
+          `;
+        } else {
+          alert('Error: ' + result.error);
+        }
+      });
+    }
+  </script>
+</body>
+</html>

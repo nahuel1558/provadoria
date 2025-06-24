@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Probador Virtual de Ropa</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="public/style.css">
 </head>
 <body>
   <h1>👕 Prueba esta remera en tu cuerpo</h1>
@@ -14,21 +14,19 @@
   <script>
     async function uploadPhoto() {
       const photoInput = document.getElementById('photo');
-      photoInput.click(); // Abre el selector de archivos
+      photoInput.click(); 
 
       photoInput.addEventListener('change', async (e) => {
         const photo = e.target.files[0];
         const formData = new FormData();
         formData.append('photo', photo);
 
-        // Envía la foto al backend
         const response = await fetch('http://localhost:3000/api/try-on', {
           method: 'POST',
           body: formData,
         });
         const result = await response.json();
 
-        // Muestra el resultado
         if (result.success) {
           document.getElementById('result').innerHTML = `
             <img src="${result.imageUrl}" alt="Remera en tu cuerpo" width="400">
